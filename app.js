@@ -28,6 +28,11 @@ db.connect(err => {
     console.log('Connected to MySQL');
 });
 
+// Root route
+app.get('/', (req, res) => {
+    res.send('Welcome to the School Management API');
+});
+
 // Add School API
 app.post('/addSchool', (req, res) => {
     const { name, address, latitude, longitude } = req.body;
