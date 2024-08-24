@@ -1,21 +1,25 @@
 const express = require('express');
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
-const app = express();
 
+// Load environment variables from .env file
 dotenv.config();
 
-// Middleware to parse JSON
+const app = express();
+
+// Middleware to parse JSON bodies
 app.use(express.json());
 
-// MySQL Connection
+// MySQL Connection Setup
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
 });
 
+// Connect to MySQL
 db.connect(err => {
     if (err) {
         console.error('Error connecting to MySQL:', err);
@@ -63,7 +67,7 @@ app.get('/listSchools', (req, res) => {
             longitude: parseFloat(longitude),
         };
 
-        // Calculate distance and sort
+        // Calculate distance and sort by proximity
         results.sort((a, b) => {
             const distanceA = calculateDistance(userLocation, { latitude: a.latitude, longitude: a.longitude });
             const distanceB = calculateDistance(userLocation, { latitude: b.latitude, longitude: b.longitude });
@@ -78,7 +82,7 @@ app.get('/listSchools', (req, res) => {
 function calculateDistance(loc1, loc2) {
     const toRad = (value) => (value * Math.PI) / 180;
 
-    const R = 6371; // Earth radius in kilometers
+    const R = 6371; // Earth's radius in kilometers
     const dLat = toRad(loc2.latitude - loc1.latitude);
     const dLon = toRad(loc2.longitude - loc1.longitude);
 
@@ -96,4 +100,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
