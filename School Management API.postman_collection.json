@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "35592727-c5db-4353-a749-19f5aa4126dd",
+		"name": "School Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37885975"
+	},
+	"item": [
+		{
+			"name": "Add School",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Holy cross school\",\n    \"address\": \"Najafgarh\",\n    \"latitude\": 69,\n    \"longitude\": -79\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://school-management-api-1-iecw.onrender.com/addSchool",
+					"protocol": "https",
+					"host": [
+						"school-management-api-1-iecw",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"addSchool"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List School",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://school-management-api-1-iecw.onrender.com/listSchools?latitude=40.7128&longitude=-74.0060",
+					"protocol": "https",
+					"host": [
+						"school-management-api-1-iecw",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"listSchools"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "40.7128"
+						},
+						{
+							"key": "longitude",
+							"value": "-74.0060"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
